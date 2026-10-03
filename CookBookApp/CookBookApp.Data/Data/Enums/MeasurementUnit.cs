@@ -14,5 +14,6 @@ public enum MeasurementUnit
     Gallon = 10,
     Ounce = 11,
     Fluidounce = 12,
-    Pound = 13
+    Pound = 13,
+    None = 14,
 }

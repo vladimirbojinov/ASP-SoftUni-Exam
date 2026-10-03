@@ -19,9 +19,9 @@ public class CookBookDbContext(DbContextOptions<CookBookDbContext> options) : Id
     {
         base.OnModelCreating(builder);
 
-        /*builder.ApplyConfiguration(new CategoryConfiguration());
+        builder.ApplyConfiguration(new CategoryConfiguration());
         builder.ApplyConfiguration(new IngredientConfiguration());
         builder.ApplyConfiguration(new RecipeConfiguration());
-        builder.ApplyConfiguration(new RecipeIngredientConfiguration());*/
+        builder.ApplyConfiguration(new RecipeIngredientConfiguration());
     }
 }

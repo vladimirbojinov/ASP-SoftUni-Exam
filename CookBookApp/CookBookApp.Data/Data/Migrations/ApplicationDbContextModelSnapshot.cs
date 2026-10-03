@@ -38,6 +38,28 @@ namespace CookBookApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Breakfast"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Main Course"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Dessert"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Salad"
+                        });
                 });
 
             modelBuilder.Entity("CookBookApp.Data.Data.Models.Ingredient", b =>
@@ -59,6 +81,83 @@ namespace CookBookApp.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Ingredients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Egg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Flour"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Milk"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Sugar"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Butter"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Salt"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Spaghetti"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Minced Beef"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Tomato"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Olive Oil"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Cucumber"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Feta Cheese"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Dark Chocolate"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Canned Tomatoes"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Onion"
+                        });
                 });
 
             modelBuilder.Entity("CookBookApp.Data.Data.Models.Recipe", b =>
@@ -100,6 +199,48 @@ namespace CookBookApp.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Recipes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CookTime = 15,
+                            Instructions = "Whisk flour, milk, eggs, sugar and salt into a smooth batter. Fry ladlefuls in melted butter until golden on both sides.",
+                            Name = "Classic Pancakes",
+                            PrepTime = 10,
+                            Servings = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            CookTime = 60,
+                            Instructions = "Fry the onion in olive oil, brown the beef, add the canned tomatoes and simmer for 45 minutes. Boil the spaghetti and serve with the sauce.",
+                            Name = "Spaghetti Bolognese",
+                            PrepTime = 15,
+                            Servings = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 4,
+                            CookTime = 1,
+                            Instructions = "Dice the tomatoes and cucumbers, dress with olive oil and salt, then top with grated feta cheese.",
+                            Name = "Shopska Salad",
+                            PrepTime = 10,
+                            Servings = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            CookTime = 25,
+                            Instructions = "Melt the chocolate with the butter, stir in sugar and eggs, fold in the flour. Bake at 180°C for about 25 minutes.",
+                            Name = "Chocolate Brownies",
+                            PrepTime = 15,
+                            Servings = 12
+                        });
                 });
 
             modelBuilder.Entity("CookBookApp.Data.Data.Models.RecipeIngredient", b =>
@@ -125,6 +266,169 @@ namespace CookBookApp.Data.Migrations
                     b.HasIndex("IngredientId");
 
                     b.ToTable("RecipesIngredients");
+
+                    b.HasData(
+                        new
+                        {
+                            RecipeId = 1,
+                            IngredientId = 2,
+                            MeasurementUnit = 3,
+                            Quantity = 200m
+                        },
+                        new
+                        {
+                            RecipeId = 1,
+                            IngredientId = 3,
+                            MeasurementUnit = 1,
+                            Quantity = 300m
+                        },
+                        new
+                        {
+                            RecipeId = 1,
+                            IngredientId = 1,
+                            MeasurementUnit = 14,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            RecipeId = 1,
+                            IngredientId = 4,
+                            MeasurementUnit = 6,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            RecipeId = 1,
+                            IngredientId = 5,
+                            MeasurementUnit = 3,
+                            Note = "melted",
+                            Quantity = 30m
+                        },
+                        new
+                        {
+                            RecipeId = 1,
+                            IngredientId = 6,
+                            MeasurementUnit = 5,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            IngredientId = 7,
+                            MeasurementUnit = 3,
+                            Quantity = 400m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            IngredientId = 8,
+                            MeasurementUnit = 3,
+                            Quantity = 500m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            IngredientId = 15,
+                            MeasurementUnit = 14,
+                            Note = "finely chopped",
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            IngredientId = 14,
+                            MeasurementUnit = 1,
+                            Note = "400 g, crushed",
+                            Quantity = 1000m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            IngredientId = 10,
+                            MeasurementUnit = 6,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            IngredientId = 6,
+                            MeasurementUnit = 5,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            RecipeId = 3,
+                            IngredientId = 9,
+                            MeasurementUnit = 14,
+                            Note = "diced",
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            RecipeId = 3,
+                            IngredientId = 11,
+                            MeasurementUnit = 14,
+                            Note = "diced",
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            RecipeId = 3,
+                            IngredientId = 12,
+                            MeasurementUnit = 3,
+                            Note = "grated",
+                            Quantity = 150m
+                        },
+                        new
+                        {
+                            RecipeId = 3,
+                            IngredientId = 10,
+                            MeasurementUnit = 6,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            RecipeId = 3,
+                            IngredientId = 6,
+                            MeasurementUnit = 5,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            RecipeId = 4,
+                            IngredientId = 13,
+                            MeasurementUnit = 3,
+                            Note = "chopped",
+                            Quantity = 200m
+                        },
+                        new
+                        {
+                            RecipeId = 4,
+                            IngredientId = 5,
+                            MeasurementUnit = 3,
+                            Quantity = 150m
+                        },
+                        new
+                        {
+                            RecipeId = 4,
+                            IngredientId = 4,
+                            MeasurementUnit = 3,
+                            Quantity = 150m
+                        },
+                        new
+                        {
+                            RecipeId = 4,
+                            IngredientId = 1,
+                            MeasurementUnit = 14,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            RecipeId = 4,
+                            IngredientId = 2,
+                            MeasurementUnit = 3,
+                            Quantity = 100m
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
