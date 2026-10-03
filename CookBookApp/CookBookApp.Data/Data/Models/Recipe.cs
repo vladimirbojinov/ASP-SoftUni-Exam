@@ -1,5 +1,6 @@
 ﻿namespace CookBookApp.Data.Data.Models;
 
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static CookBookApp.Data.Common.ModelValidation.Recipe;
@@ -32,6 +33,7 @@ public class Recipe
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }
 
+    [DeleteBehavior(DeleteBehavior.Restrict)]
     public Category Category { get; set; } = null!;
 
     public ICollection<RecipeIngredient> RecipesIngredients { get; set; } 

@@ -21,7 +21,9 @@ public class RecipeIngredient
     [StringLength(NoteMaxLength)]
     public string? Note { get; set; }
 
+    [DeleteBehavior(DeleteBehavior.Restrict)]
     public Recipe Recipe { get; set; } = null!;
 
+    [DeleteBehavior(DeleteBehavior.Restrict)]
     public Ingredient Ingredient { get; set; } = null!;
 }
