@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CookBookApp.Data/CookBookApp.Data.csproj" Id="c5ef9f59-1550-4a8d-afe2-d270c2fc78a1" />
+  <Project Path="CookBookApp/CookBookApp.Web.csproj" />
+</Solution>
