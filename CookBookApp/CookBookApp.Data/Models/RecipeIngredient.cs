@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.Data.Data.Models;
+﻿namespace CookBookApp.Data.Models;
 
-using CookBookApp.Data.Data.Enums;
+using CookBookApp.Data.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,9 +21,7 @@ public class RecipeIngredient
     [StringLength(NoteMaxLength)]
     public string? Note { get; set; }
 
-    [DeleteBehavior(DeleteBehavior.Restrict)]
     public Recipe Recipe { get; set; } = null!;
 
-    [DeleteBehavior(DeleteBehavior.Restrict)]
     public Ingredient Ingredient { get; set; } = null!;
 }

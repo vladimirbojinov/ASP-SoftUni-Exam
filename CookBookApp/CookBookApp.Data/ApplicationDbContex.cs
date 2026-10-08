@@ -1,7 +1,7 @@
 ﻿namespace CookBookApp.Data;
 
-using CookBookApp.Data.Data.Configurations;
-using CookBookApp.Data.Data.Models;
+using CookBookApp.Data.Configurations;
+using CookBookApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

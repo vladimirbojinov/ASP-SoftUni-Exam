@@ -2,7 +2,99 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="bg-body-tertiary rounded-3 p-4 p-md-5 mb-5 text-center">
+    <h1 class="display-4 fw-bold">Welcome to Recipe App</h1>
+    <p class="lead text-body-secondary col-lg-8 mx-auto mb-4">
+        Your personal place to collect, organize and cook your favorite recipes.
+        Everything you need is in one spot: ingredients, quantities, timings and clear instructions.
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a asp-controller="Recipe" asp-action="Index" class="btn btn-primary btn-lg px-4">Browse recipes</a>
+        <a asp-controller="Recipe" asp-action="Create" class="btn btn-outline-success btn-lg px-4">Add your own</a>
+    </div>
+</section>
+
+<section class="mb-5">
+    <h2 class="text-center mb-4">What you can do here</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Organize by category</h3>
+                    <p class="card-text text-body-secondary">
+                        Group your recipes into categories like breakfast, soups or desserts,
+                        so you can always find what you are craving.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Detailed ingredients</h3>
+                    <p class="card-text text-body-secondary">
+                        Every ingredient comes with an exact quantity, a unit
+                        and an optional note, such as "finely chopped".
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Know your time</h3>
+                    <p class="card-text text-body-secondary">
+                        See preparation and cooking time and the number of servings
+                        before you start, so there are no surprises.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Clear instructions</h3>
+                    <p class="card-text text-body-secondary">
+                        Follow simple instructions and add a photo to make
+                        each recipe easy to recognize.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <h2 class="text-center mb-4">How it works</h2>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+            <div class="d-flex align-items-start">
+                <span class="badge text-bg-primary rounded-pill fs-5 me-3">1</span>
+                <div>
+                    <h3 class="h5">Explore</h3>
+                    <p class="text-body-secondary mb-0">Browse the recipe collection and pick something you like.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex align-items-start">
+                <span class="badge text-bg-primary rounded-pill fs-5 me-3">2</span>
+                <div>
+                    <h3 class="h5">Cook</h3>
+                    <p class="text-body-secondary mb-0">Check the ingredients and follow the instructions step by step.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex align-items-start">
+                <span class="badge text-bg-primary rounded-pill fs-5 me-3">3</span>
+                <div>
+                    <h3 class="h5">Build</h3>
+                    <p class="text-body-secondary mb-0">Add your own recipes and build your personal cookbook.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

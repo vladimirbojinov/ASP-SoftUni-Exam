@@ -1,4 +1,4 @@
-﻿namespace CookBookApp.Data.Data.Models;
+﻿namespace CookBookApp.Data.Models;
 
 using System.ComponentModel.DataAnnotations;
 using static CookBookApp.Data.Common.ModelValidation.Category;

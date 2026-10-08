@@ -1,4 +1,4 @@
-﻿namespace CookBookApp.Data.Data.Models;
+﻿namespace CookBookApp.Data.Models;
 
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;

@@ -649,13 +649,13 @@ namespace CookBookApp.Data.Migrations
                     b.HasOne("CookBookApp.Data.Data.Models.Ingredient", "Ingredient")
                         .WithMany("RecipesIngredients")
                         .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CookBookApp.Data.Data.Models.Recipe", "Recipe")
                         .WithMany("RecipesIngredients")
                         .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Ingredient");

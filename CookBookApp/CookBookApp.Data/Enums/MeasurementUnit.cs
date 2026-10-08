@@ -1,4 +1,4 @@
-﻿namespace CookBookApp.Data.Data.Enums;
+﻿namespace CookBookApp.Data.Enums;
 
 public enum MeasurementUnit
 {

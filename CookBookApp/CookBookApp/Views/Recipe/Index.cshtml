@@ -1,0 +1,77 @@
+﻿@using CookBookApp.Web.ViewModels.Recipe
+@model RecipeIndexViewModel[] 
+
+@{
+    ViewData["Title"] = "Recipes";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <h1 class="h2 mb-0">Recipes</h1>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Add Recipe
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center" role="alert">
+        No recipes found. Try changing your search or filters, or
+        <a asp-action="Create" class="alert-link">add a new recipe</a>.
+    </div>
+}
+else
+{
+    <p class="text-muted">
+        Showing @Model.Length recipe(s)
+    </p>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var recipe in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    
+                    <div class="ratio ratio-4x3">
+                        <img src="@recipe.ImageUrl." class="object-fit-cover" alt="@recipe.Name" />
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h2 class="h5 card-title mb-0">@recipe.Name</h2>
+                            <span class="badge text-bg-secondary">@recipe.CategoryName</span>
+                        </div>
+
+                        @*<p class="card-text text-muted">@recipe.ShortDescription</p>*@
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Prep time</span>
+                            <span>@recipe.PrepTime min</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Cook time</span>
+                            <span>@recipe.CookTime min</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Servings</span>
+                            <span>@recipe.Servings</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Ingredients</span>
+                            <span>@recipe.IngredientCount</span>
+                        </li>
+                    </ul>
+
+                    <div class="card-footer d-flex justify-content-between">
+                        <a asp-action="Details" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                        <div class="btn-group" role="group" aria-label="Recipe actions">
+                            <a asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>             
+}
