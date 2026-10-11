@@ -1,6 +1,4 @@
-﻿using CookBookApp.Web.ViewModels.Category;
-
-namespace CookBookApp.Web.ViewModels.Recipe;
+﻿namespace CookBookApp.CookBookApp.DTOs.Recipe;
 
 public class RecipeIndexViewModel
 {

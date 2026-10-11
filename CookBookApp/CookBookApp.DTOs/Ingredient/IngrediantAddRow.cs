@@ -1,6 +1,6 @@
 ﻿using CookBookApp.Data.Enums;
 
-namespace CookBookApp.Web.ViewModels.Ingredient;
+namespace CookBookApp.CookBookApp.DTOs.Ingredient;
 
 public class IngredientAddRow
 {

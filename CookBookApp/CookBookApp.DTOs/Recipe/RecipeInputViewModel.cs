@@ -1,10 +1,10 @@
-﻿namespace CookBookApp.Web.ViewModels.Recipe;
+﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
+using CookBookApp.DTOs.Category;
 
-using CookBookApp.Web.ViewModels.Category;
-using CookBookApp.Web.ViewModels.Ingredient;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using static CookBookApp.Data.Common.ModelValidation.Recipe;
+
+namespace CookBookApp.Web.ViewModels.Recipe;
 
 public class RecipeInputViewModel
 {

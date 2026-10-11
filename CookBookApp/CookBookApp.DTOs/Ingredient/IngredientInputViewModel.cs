@@ -1,7 +1,7 @@
-﻿namespace CookBookApp.Web.ViewModels.Ingredient;
-
-using CookBookApp.Data.Enums;
+﻿using CookBookApp.Data.Enums;
 using System.ComponentModel.DataAnnotations;
+
+namespace CookBookApp.CookBookApp.DTOs.Ingredient;
 
 public class IngredientInputViewModel
 {

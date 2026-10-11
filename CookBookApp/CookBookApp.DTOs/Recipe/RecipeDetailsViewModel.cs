@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.Web.ViewModels.Recipe;
+﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
 
-using CookBookApp.Web.ViewModels.Ingredient;
+namespace CookBookApp.CookBookApp.DTOs.Recipe;
 
 public class RecipeDetailsViewModel
 {

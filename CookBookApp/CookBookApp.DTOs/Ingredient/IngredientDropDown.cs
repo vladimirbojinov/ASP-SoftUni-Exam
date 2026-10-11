@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.Web.ViewModels.Ingredient;
+﻿using CookBookApp.Data.Enums;
 
-using CookBookApp.Data.Enums;
+namespace CookBookApp.CookBookApp.DTOs.Ingredient;
 
 public class IngredientDropDown
 {

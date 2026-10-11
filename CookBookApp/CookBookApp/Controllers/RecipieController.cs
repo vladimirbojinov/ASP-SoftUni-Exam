@@ -1,5 +1,6 @@
 ﻿namespace CookBookApp.Web.Controllers;
 
+using CookBookApp.Core.Contracts;
 using CookBookApp.Data;
 using CookBookApp.Data.Enums;
 using CookBookApp.Data.Models;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static CookBookApp.Web.Common.ApplicationConstants;
 
-public class RecipeController(CookBookDbContext dbContext) : Controller
+public class RecipeController(IRecipeService recipeService) : Controller
 {
     [HttpGet]
     public IActionResult Index()

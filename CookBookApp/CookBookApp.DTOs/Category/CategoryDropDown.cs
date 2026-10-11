@@ -1,4 +1,4 @@
-﻿namespace CookBookApp.Web.ViewModels.Category;
+﻿namespace CookBookApp.DTOs.Category;
 
 public class CategoryDropDown
 {
