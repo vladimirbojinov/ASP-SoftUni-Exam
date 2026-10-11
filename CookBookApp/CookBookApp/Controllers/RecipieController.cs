@@ -15,7 +15,7 @@ public class RecipeController(CookBookDbContext dbContext) : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        RecipeIndexViewModel[] recipes = dbContext.Recipes
+        List<RecipeIndexViewModel> recipes = dbContext.Recipes
             .AsNoTracking()
             .OrderBy(r => r.Name)
             .Select(r => new RecipeIndexViewModel()
@@ -27,9 +27,11 @@ public class RecipeController(CookBookDbContext dbContext) : Controller
                 CookTime = r.CookTime,
                 Servings = r.Servings,
                 IngredientCount = r.RecipesIngredients.Count,
-                CategoryName = r.Category.Name,
+                CategoryName = r.Category.Name
             })
-            .ToArray();
+            .ToList();
+
+        ViewData["CategoriesDropDown"] = GetCategoryDropDown();
 
         return View(recipes);
     }
@@ -199,6 +201,43 @@ public class RecipeController(CookBookDbContext dbContext) : Controller
         dbContext.SaveChanges();
 
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult Search(string? nameFilter, int? categoryId)
+    {
+        var recipesQuery = dbContext.Recipes.AsQueryable();
+
+        if (string.IsNullOrEmpty(nameFilter) == false)
+        {
+            recipesQuery = dbContext.Recipes
+                .Where(r => r.Name.Contains(nameFilter));
+        }
+
+        if (categoryId != 0)
+        {
+            recipesQuery = recipesQuery
+                .Where(r => r.CategoryId == categoryId);
+        }
+
+        List<RecipeIndexViewModel> filteredRecipes = recipesQuery
+            .OrderBy(r => r.Name)
+            .Select(r => new RecipeIndexViewModel()
+            {
+                Id = r.Id,
+                Name = r.Name,
+                ImageUrl = r.ImageUrl ?? DefaultImageUrl,
+                PrepTime = r.PrepTime,
+                CookTime = r.CookTime,
+                Servings = r.Servings,
+                IngredientCount = r.RecipesIngredients.Count(),
+                CategoryName = r.Category.Name
+            })
+            .ToList();
+
+        ViewData["CategoriesDropDown"] = GetCategoryDropDown();
+
+        return View(nameof(Index), filteredRecipes);
     }
 
     [HttpPost]
