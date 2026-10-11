@@ -1,9 +1,5 @@
 namespace CookBookApp;
 
-using CookBookApp.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 public class Program
 {
     public static void Main(string[] args)
@@ -11,13 +7,11 @@ public class Program
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        builder.Services.AddDbContext<CookBookDbContext>(options =>
-            options.UseSqlServer(connectionString));
-        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+        builder.Services.AddApplicationServices();
+        builder.Services.AddApplicationDbContext(builder.Configuration);
+        builder.Services.AddApplicationIdentity();
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<CookBookDbContext>();
+        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
         builder.Services.AddControllersWithViews();
 
         WebApplication app = builder.Build();
