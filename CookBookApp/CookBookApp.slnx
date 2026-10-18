@@ -2,6 +2,7 @@
   <Project Path="CookBookApp.Core/CookBookApp.Core.csproj" Id="0be44c38-ac1d-4689-b000-198363a2cea3" />
   <Project Path="CookBookApp.Data/CookBookApp.Data.csproj" Id="c5ef9f59-1550-4a8d-afe2-d270c2fc78a1" />
   <Project Path="CookBookApp.DTOs/CookBookApp.DTOs.csproj" Id="1929b5d9-1ca2-4798-b331-375c17db42e4" />
+  <Project Path="CookBookApp.GCommon/CookBookApp.GCommon.csproj" Id="9b90dbe9-545c-49bf-8531-e64e9235abc7" />
   <Project Path="CookBookApp.Models/CookBookApp.Models.csproj" Id="827a6354-4483-4ffd-b819-9ec232e3cb1b" />
   <Project Path="CookBookApp/CookBookApp.Web.csproj" />
 </Solution>

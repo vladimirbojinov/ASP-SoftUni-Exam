@@ -1,12 +1,13 @@
 ﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Category;
-
+using CookBookApp.DTOs.Ingredient;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-using static CookBookApp.Data.Common.ModelValidation.Recipe;
+using static CookBookApp.GCommon.Constants.ModelValidationConstants.Recipe;
 
-namespace CookBookApp.Web.ViewModels.Recipe;
+namespace CookBookApp.DTOs.Recipe;
 
-public class RecipeInputViewModel
+public class RecipeInputModel
 {
     [Required]
     public int Id { get; set; }
@@ -36,15 +37,12 @@ public class RecipeInputViewModel
     public IngredientAddRow NewIngredient { get; set; }
         = new IngredientAddRow();
 
-    public List<IngredientInputViewModel> Ingredients { get; set; }
-        = new List<IngredientInputViewModel>();
+    public IngredientInputViewModel[] Ingredients { get; set; } = [];
 
-    public List<IngredientDropDown> IngredientDropDowns { get; set; }
-        = new List<IngredientDropDown>();
+    public IngredientDropDown[] IngredientDropDowns { get; set; } = [];
 
     [Required]
     public int CategoryId { get; set; }
 
-    public List<CategoryDropDown> CategoryDropDown { get; set; }
-        = new List<CategoryDropDown>();
+    public CategoryDropDown[] CategoryDropDown { get; set; } = [];
 }

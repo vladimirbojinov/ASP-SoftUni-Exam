@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.CookBookApp.DTOs.Recipe;
+﻿namespace CookBookApp.DTOs.Recipe;
 
-public class RecipeIndexViewModel
+public class RecipeIndexModel
 {
     public int Id { get; set; }
 

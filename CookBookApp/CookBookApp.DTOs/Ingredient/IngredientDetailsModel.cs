@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.CookBookApp.DTOs.Ingredient;
+﻿namespace CookBookApp.DTOs.Ingredient;
 
-public class IngredientDetailsViewModel
+public class IngredientDetailsModel
 {
     public string Name { get; set; } = null!;
 

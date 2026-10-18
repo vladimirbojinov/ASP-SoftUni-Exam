@@ -1,11 +1,8 @@
-﻿@using CookBookApp.Web.ViewModels.Category
-@using CookBookApp.Web.ViewModels.Recipe
-
-@model List<RecipeIndexViewModel>
+﻿@model RecipeIndexModel[]
 
 @{
 	ViewData["Title"] = "Recipes";
-	var categoriesDropDown = ViewData["CategoriesDropDown"] as List<CategoryDropDown>;
+	var categoriesDropDown = ViewData["CategoriesDropDown"] as CategoryDropDown[];
 }
 
 <form asp-action="Search" method="get" class="card card-body bg-light mb-4">
@@ -48,7 +45,7 @@
 else
 {
 	<p class="text-muted">
-		Showing @Model.Count recipe(s)
+		Showing @Model.Length recipe(s)
 	</p>
 
 	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

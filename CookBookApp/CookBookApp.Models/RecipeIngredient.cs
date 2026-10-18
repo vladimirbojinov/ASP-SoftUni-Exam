@@ -1,10 +1,10 @@
 ﻿namespace CookBookApp.Data.Models;
 
-using CookBookApp.Data.Enums;
+using CookBookApp.GCommon.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static CookBookApp.Data.Common.ModelValidation.RecipeIngredient;
+using static CookBookApp.GCommon.Constants.ModelValidationConstants.RecipeIngredient;
 
 [PrimaryKey(nameof(RecipeId), nameof(IngredientId))]
 public class RecipeIngredient

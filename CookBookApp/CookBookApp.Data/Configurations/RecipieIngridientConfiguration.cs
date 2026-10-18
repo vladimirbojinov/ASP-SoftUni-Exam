@@ -1,7 +1,7 @@
 ﻿namespace CookBookApp.Data.Configurations;
 
-using CookBookApp.Data.Enums;
 using CookBookApp.Data.Models;
+using CookBookApp.GCommon.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

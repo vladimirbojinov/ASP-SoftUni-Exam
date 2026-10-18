@@ -1,8 +1,8 @@
-﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
+﻿using CookBookApp.DTOs.Ingredient;
 
-namespace CookBookApp.CookBookApp.DTOs.Recipe;
+namespace CookBookApp.DTOs.Recipe;
 
-public class RecipeDetailsViewModel
+public class RecipeDetailsModel
 {
     public int Id { get; set; }
 
@@ -22,6 +22,5 @@ public class RecipeDetailsViewModel
 
     public int Servings { get; set; }
 
-    public List<IngredientDetailsViewModel> Ingredients { get; set; } 
-        = new List<IngredientDetailsViewModel>();
+    public IngredientDetailsModel[] Ingredients { get; set; } = [];
 }

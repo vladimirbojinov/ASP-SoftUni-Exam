@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static CookBookApp.Data.Common.ModelValidation.Ingredient;
+using static CookBookApp.GCommon.Constants.ModelValidationConstants.Ingredient;
 
 [Index(nameof(Name), IsUnique = true)]
 public class Ingredient

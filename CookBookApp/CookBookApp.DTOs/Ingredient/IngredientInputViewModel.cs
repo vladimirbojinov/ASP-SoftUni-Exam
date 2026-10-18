@@ -1,4 +1,4 @@
-﻿using CookBookApp.Data.Enums;
+﻿using CookBookApp.GCommon.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace CookBookApp.CookBookApp.DTOs.Ingredient;

@@ -1,6 +1,6 @@
-﻿using CookBookApp.Data.Enums;
+﻿using CookBookApp.GCommon.Enums;
 
-namespace CookBookApp.CookBookApp.DTOs.Ingredient;
+namespace CookBookApp.DTOs.Ingredient;
 
 public class IngredientAddRow
 {

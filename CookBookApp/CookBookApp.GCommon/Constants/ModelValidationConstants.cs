@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.Data.Common;
+﻿namespace CookBookApp.GCommon.Constants;
 
-public static class ModelValidation
+public static class ModelValidationConstants
 {
     public static class Category
     {

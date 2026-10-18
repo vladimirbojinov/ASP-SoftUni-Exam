@@ -11,6 +11,8 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IRecipeService, RecipeService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IIngredientService, IngredientService>();
 
         return services;
     }

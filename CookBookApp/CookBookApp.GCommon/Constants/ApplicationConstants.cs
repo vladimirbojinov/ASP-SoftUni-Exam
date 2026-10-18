@@ -1,6 +1,6 @@
-﻿namespace CookBookApp.Web.Common;
+﻿namespace CookBookApp.GCommon.Constants;
 
-public class ApplicationConstants
+public static class ApplicationConstants
 {
     public const string DefaultImageUrl = @"https://placehold.co/600x400?text=No+Image";
 }

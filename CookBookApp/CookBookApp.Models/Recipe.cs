@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static CookBookApp.Data.Common.ModelValidation.Recipe;
+using static CookBookApp.GCommon.Constants.ModelValidationConstants.Recipe;
 
 public class Recipe
 {
