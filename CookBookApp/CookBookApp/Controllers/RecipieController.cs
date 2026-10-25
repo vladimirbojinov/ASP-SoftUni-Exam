@@ -2,7 +2,6 @@
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Recipe;
 using Microsoft.AspNetCore.Mvc;
-using static CookBookApp.GCommon.Constants.ApplicationConstants;
 
 namespace CookBookApp.Web.Controllers;
 
@@ -50,7 +49,7 @@ public class RecipeController(
     [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
-        var model = await recipeService.GetRecipeDetailsAsync(id);
+        RecipeDetailsModel? model = await recipeService.GetRecipeDetailsAsync(id);
 
         if (model is null) return BadRequest();
 
@@ -60,7 +59,7 @@ public class RecipeController(
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var model = await recipeService.GetRecipeForEditAsync(id);
+        RecipeInputModel? model = await recipeService.GetRecipeForEditAsync(id);
 
         if (model is null) return BadRequest();
 
@@ -87,7 +86,7 @@ public class RecipeController(
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
-        var model = await recipeService.GetRecipeForDeleteAsync(id);
+        RecipeDeleteModel? model = await recipeService.GetRecipeForDeleteAsync(id);
 
         if (model is null) return BadRequest();
 
@@ -105,7 +104,7 @@ public class RecipeController(
     [HttpGet]
     public async Task<IActionResult> Search(string? nameFilter, int? categoryId)
     {
-        var filteredRecipes = await recipeService.SearchAsync(nameFilter, categoryId);
+        RecipeIndexModel[] filteredRecipes = await recipeService.SearchAsync(nameFilter, categoryId);
 
         ViewData["CategoriesDropDown"] = await categoryService.GetCategoryDropDownAsync();
 

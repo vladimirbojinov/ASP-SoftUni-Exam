@@ -2,17 +2,18 @@
 
 using CookBookApp.Data;
 using CookBookApp.Data.Models;
+
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Recipe;
 
 using CookBookApp.GCommon.Enums;
-
 using static CookBookApp.GCommon.Constants.ApplicationConstants;
 
 using CookBookApp.Core.Contracts;
-namespace CookBookApp.Core.Services;
 
 using Microsoft.EntityFrameworkCore;
+
+namespace CookBookApp.Core.Services;
 
 
 public class RecipeService(
@@ -73,7 +74,7 @@ public class RecipeService(
 
     public async Task<RecipeIndexModel[]> SearchAsync(string? nameFilter, int? categoryId)
     {
-        var recipesQuery = dbContext.Recipes.AsQueryable();
+        IQueryable<Recipe> recipesQuery = dbContext.Recipes.AsQueryable();
 
         if (string.IsNullOrEmpty(nameFilter) == false)
         {
@@ -107,7 +108,7 @@ public class RecipeService(
 
     public async Task DeleteRecipe(int id)
     {
-        dbContext.Recipes.Where(r => r.Id == id).ExecuteDelete();
+        await dbContext.Recipes.Where(r => r.Id == id).ExecuteDeleteAsync();
     }
 
     public async Task<RecipeDetailsModel?> GetRecipeDetailsAsync(int id)
@@ -208,7 +209,7 @@ public class RecipeService(
 
         if (recipe is null) return null;
 
-        var model = new RecipeDeleteModel()
+        RecipeDeleteModel model = new()
         {
             Id = id,
             Name = recipe.Name,
