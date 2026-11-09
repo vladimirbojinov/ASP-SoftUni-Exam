@@ -3,6 +3,8 @@
 using CookBookApp.Core.Contracts;
 using CookBookApp.Core.Services;
 using CookBookApp.Data;
+using CookBookApp.Data.Repository;
+using CookBookApp.Data.Repository.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +13,19 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IRecipeService, RecipeService>();
+        services.AddScoped<IRecipeIngredientService, RecipeIngredientService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IIngredientService, IngredientService>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddRepositoryServices(this IServiceCollection services)
+    {
+        services.AddScoped<IRecipeRepository, RecipeRepository>();
+        services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IIngredientRepository, IngredientRepository>();
 
         return services;
     }

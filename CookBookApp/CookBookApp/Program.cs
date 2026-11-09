@@ -8,6 +8,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddApplicationServices();
+        builder.Services.AddRepositoryServices();
         builder.Services.AddApplicationDbContext(builder.Configuration);
         builder.Services.AddApplicationIdentity();
 
