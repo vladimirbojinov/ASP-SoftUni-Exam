@@ -95,9 +95,9 @@ public class RecipeController(
     }
 
     [HttpPost]
-    public IActionResult DeleteConfirm(int id)
+    public async Task<IActionResult> DeleteConfirm(int id)
     {
-        recipeService.DeleteRecipe(id);
+        await recipeService.DeleteRecipe(id);
 
         return RedirectToAction(nameof(Index));
     }
