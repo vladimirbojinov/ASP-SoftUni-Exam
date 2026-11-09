@@ -203,7 +203,7 @@ public class RecipeService(
         return model;
     }
 
-    public async Task<RecipeDeleteModel> GetRecipeForDeleteAsync(int id)
+    public async Task<RecipeDeleteModel?> GetRecipeForDeleteAsync(int id)
     {
         Recipe? recipe = await GetRecipeAsync(id);
 
