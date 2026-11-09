@@ -57,6 +57,7 @@ public class RecipeService(
             .Where(line => line.Length > 0));
 
         recipe.Name = model.Name.Trim();
+        recipe.CategoryId = model.CategoryId;
         recipe.PrepTime = model.PrepTime;
         recipe.CookTime = model.CookTime;
         recipe.Servings = model.Servings;
