@@ -1,30 +1,25 @@
 ﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
-
-using CookBookApp.Data;
+using CookBookApp.Core.Contracts;
 using CookBookApp.Data.Models;
-
+using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Recipe;
-
 using CookBookApp.GCommon.Enums;
-using static CookBookApp.GCommon.Constants.ApplicationConstants;
-
-using CookBookApp.Core.Contracts;
-
 using Microsoft.EntityFrameworkCore;
+using static CookBookApp.GCommon.Constants.ApplicationConstants;
 
 namespace CookBookApp.Core.Services;
 
 
 public class RecipeService(
-    CookBookDbContext dbContext,
+    IRecipeRepository recipeRepository,
     ICategoryService categoryService,
     IIngredientService ingredientService
 ) : IRecipeService
 {
     public async Task<Recipe?> GetRecipeAsync(int id)
     {
-        return await dbContext.Recipes
+        return await recipeRepository.GetAll()
             .Include(r => r.Category)
             .Include(r => r.RecipesIngredients)
             .ThenInclude(r => r.Ingredient)
@@ -47,8 +42,8 @@ public class RecipeService(
             CategoryId = model.CategoryId
         };
 
-        await dbContext.AddAsync(recipe);
-        await dbContext.SaveChangesAsync();
+        await recipeRepository.AddAsync(recipe);
+        await recipeRepository.SaveChangesAsync();
     }
 
     public async Task<bool> EditRecipeAsync(RecipeInputModel model)
@@ -67,18 +62,18 @@ public class RecipeService(
         recipe.Servings = model.Servings;
         recipe.ImageUrl = model.ImageUrl?.Trim();
 
-        await dbContext.SaveChangesAsync();
+        await recipeRepository.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<RecipeIndexModel[]> SearchAsync(string? nameFilter, int? categoryId)
     {
-        IQueryable<Recipe> recipesQuery = dbContext.Recipes.AsQueryable();
+        IQueryable<Recipe> recipesQuery = recipeRepository.GetAllAsNoTracking();
 
         if (string.IsNullOrEmpty(nameFilter) == false)
         {
-            recipesQuery = dbContext.Recipes
+            recipesQuery = recipesQuery
                 .Where(r => r.Name.Contains(nameFilter));
         }
 
@@ -108,7 +103,12 @@ public class RecipeService(
 
     public async Task DeleteRecipe(int id)
     {
-        await dbContext.Recipes.Where(r => r.Id == id).ExecuteDeleteAsync();
+        Recipe? recipeToRemove = await recipeRepository.FindByIdAsync(id);
+
+        if (recipeToRemove is null) return;
+
+        recipeRepository.Remove(recipeToRemove);
+        await recipeRepository.SaveChangesAsync();
     }
 
     public async Task<RecipeDetailsModel?> GetRecipeDetailsAsync(int id)
@@ -141,7 +141,7 @@ public class RecipeService(
 
     public async Task<RecipeIndexModel[]> GetRecipeIndexAsync()
     {
-        return await dbContext.Recipes
+        return await recipeRepository.GetAllAsNoTracking()
             .AsNoTracking()
             .OrderBy(r => r.Name)
             .Select(r => new RecipeIndexModel()
