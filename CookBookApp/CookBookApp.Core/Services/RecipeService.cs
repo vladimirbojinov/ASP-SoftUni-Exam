@@ -218,43 +218,6 @@ public class RecipeService(
         return model;
     }
 
-    public async Task AddRecipeIngredientRowAsync(int recipeId, IngredientAddRow newIngredient)
-    {
-        Recipe? recipe = await GetRecipeAsync(recipeId);
-        if (recipe is null) return;
-
-        bool isIngredientDuplicate = await dbContext.RecipesIngredients
-            .AnyAsync(ri => ri.RecipeId == recipeId && ri.IngredientId == newIngredient.Id);
-
-        if (isIngredientDuplicate) return;
-
-        await dbContext.RecipesIngredients.AddAsync(new RecipeIngredient
-        {
-            RecipeId = recipeId,
-            IngredientId = newIngredient.Id,
-            Quantity = newIngredient.Quantity,
-            MeasurementUnit = newIngredient.MeasurementUnit,
-            Note = null ?? newIngredient.Note?.Trim()
-        });
-
-        await dbContext.SaveChangesAsync();
-    }
-
-    public async Task DeleteRecipeIngredientRowAsync(int recipeId, int ingredientId)
-    {
-        Recipe? recipe = await GetRecipeAsync(recipeId);
-        if (recipe is null) return;
-
-        Ingredient? ingredient = await ingredientService.GetIngredientAsync(ingredientId);
-        if (ingredient is null) return;
-
-        await dbContext.RecipesIngredients
-            .Where(ri => ri.Recipe.Id == recipe.Id && ri.Ingredient.Id == ingredient.Id)
-            .ExecuteDeleteAsync();
-
-        await dbContext.SaveChangesAsync();
-    }
-
     private string? DisplayAbbreviatedUnit(MeasurementUnit measurementUnit)
     {
         return measurementUnit switch
