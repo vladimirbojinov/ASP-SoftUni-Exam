@@ -32,12 +32,12 @@ public abstract class BaseRepository<TEntity>(
                     .AsQueryable();
     }
 
-    public void RemoveAsync(TEntity entity)
+    public void Remove(TEntity entity)
     {
         DbSet.Remove(entity);
     }
 
-    public void RemoveRangeAsync(IEnumerable<TEntity> entities)
+    public void RemoveRange(IEnumerable<TEntity> entities)
     {
         DbSet.RemoveRange(entities);
     }
@@ -47,12 +47,12 @@ public abstract class BaseRepository<TEntity>(
         await DbContext.SaveChangesAsync();
     }
 
-    public void UpdateAsync(TEntity entity)
+    public void Update(TEntity entity)
     {
         DbContext.Update(entity);
     }
 
-    public void UpdateRangeAsync(IEnumerable<TEntity> entities)
+    public void UpdateRange(IEnumerable<TEntity> entities)
     {
         DbContext.UpdateRange(entities);
     }

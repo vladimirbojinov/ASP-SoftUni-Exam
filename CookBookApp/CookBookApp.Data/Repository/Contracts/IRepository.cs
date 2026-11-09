@@ -10,13 +10,13 @@ public interface IRepository<TEntity> where TEntity : class
 
     Task AddRangeAsync(IEnumerable<TEntity> entities);
 
-    void UpdateAsync(TEntity entity);
+    void Update(TEntity entity);
 
-    void UpdateRangeAsync(IEnumerable<TEntity> entities);
+    void UpdateRange(IEnumerable<TEntity> entities);
 
-    void RemoveAsync(TEntity entity);
+    void Remove(TEntity entity);
 
-    void RemoveRangeAsync(IEnumerable<TEntity> entities);
+    void RemoveRange(IEnumerable<TEntity> entities);
 
     Task SaveChangesAsync();
 }
