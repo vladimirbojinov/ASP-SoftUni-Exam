@@ -7,6 +7,7 @@ namespace CookBookApp.Web.Controllers;
 
 public class RecipeController(
     IRecipeService recipeService,
+    IRecipeIngredientService recipeIngredientService,
     ICategoryService categoryService
 ) : Controller
 {
@@ -116,7 +117,7 @@ public class RecipeController(
     {
         if (ModelState.IsValid == false) return BadRequest();
 
-        await recipeService.AddRecipeIngredientRowAsync(recipeId, newIngredient);
+        await recipeIngredientService.AddRecipeIngredientRowAsync(recipeId, newIngredient);
 
         return RedirectToAction(nameof(Edit), new { id = recipeId });
     }
@@ -124,7 +125,7 @@ public class RecipeController(
     [HttpPost]
     public async Task<IActionResult> RemoveRow(int recipeId, int ingredientId)
     {
-        await recipeService.DeleteRecipeIngredientRowAsync(recipeId, ingredientId);
+        await recipeIngredientService.RemoveRecipeIngredientRowAsync(recipeId, ingredientId);
 
         return RedirectToAction(nameof(Edit), new { id = recipeId });
     }
