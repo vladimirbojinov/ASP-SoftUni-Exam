@@ -111,7 +111,7 @@ public class RecipeController(
     {
         RecipeDeleteModel? model = await recipeService.GetRecipeForDeleteAsync(id);
 
-        if (model is null) return BadRequest();
+        if (model is null) return NotFound("Recipe not found!");
 
         return View(model);
     }
