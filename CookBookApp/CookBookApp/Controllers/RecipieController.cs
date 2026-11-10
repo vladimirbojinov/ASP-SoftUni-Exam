@@ -8,7 +8,8 @@ namespace CookBookApp.Web.Controllers;
 public class RecipeController(
     IRecipeService recipeService,
     IRecipeIngredientService recipeIngredientService,
-    ICategoryService categoryService
+    ICategoryService categoryService,
+    IIngredientService ingredientService
 ) : Controller
 {
     [HttpGet]
