@@ -45,26 +45,27 @@ public class RecipeService(
         await recipeRepository.SaveChangesAsync();
     }
 
-    public async Task<bool> EditRecipeAsync(RecipeInputModel model)
+    public async Task EditRecipeAsync(RecipeInputModel model)
     {
-        Recipe? recipe = await GetRecipeAsync(model.Id);
-        if (recipe is null) return false;
+        Recipe recipe = await recipeRepository.GetByIdAsync(model.Id)
+            ?? throw new ArgumentException("Recipe not found!");
+
+        if (await categoryService.ExistsAsync(model.CategoryId) == false)
+            throw new InvalidOperationException("Category wasn't selected!");
 
         recipe.Instructions = string.Join('\n',
-            recipe.Instructions
+            model.Instructions.Trim()
             .Split('\n', StringSplitOptions.TrimEntries)
             .Where(line => line.Length > 0));
 
         recipe.Name = model.Name.Trim();
-        recipe.CategoryId = model.CategoryId;
         recipe.PrepTime = model.PrepTime;
         recipe.CookTime = model.CookTime;
         recipe.Servings = model.Servings;
-        recipe.ImageUrl = model.ImageUrl?.Trim();
+        recipe.ImageUrl = model.ImageUrl?.Trim() ?? DefaultImageUrl;
+        recipe.CategoryId = model.CategoryId;
 
         await recipeRepository.SaveChangesAsync();
-
-        return true;
     }
 
     public async Task<RecipeIndexModel[]> SearchAsync(string? nameFilter, int? categoryId)

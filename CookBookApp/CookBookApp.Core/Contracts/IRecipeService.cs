@@ -23,5 +23,5 @@ public interface IRecipeService
 
     Task CreateRecipeAsync(RecipeInputModel model);
 
-    Task<bool> EditRecipeAsync(RecipeInputModel model);
+    Task EditRecipeAsync(RecipeInputModel model);
 }
