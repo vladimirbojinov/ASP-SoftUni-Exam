@@ -21,7 +21,7 @@ public interface IRecipeService
 
     Task<Recipe?> GetFullRecipeAsync(int id);
 
-    Task SaveRecipeAsync(RecipeInputModel model);
+    Task CreateRecipeAsync(RecipeInputModel model);
 
     Task<bool> EditRecipeAsync(RecipeInputModel model);
 }

@@ -25,7 +25,7 @@ public class RecipeService(
             .SingleOrDefaultAsync(r => r.Id == id);
     }
 
-    public async Task SaveRecipeAsync(RecipeInputModel model)
+    public async Task CreateRecipeAsync(RecipeInputModel model)
     {
         if (await categoryService.ExistsAsync(model.CategoryId) == false)
             throw new InvalidOperationException("Category wasn't selected!");
