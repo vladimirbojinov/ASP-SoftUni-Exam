@@ -32,14 +32,18 @@ public class RecipeController(
     [HttpPost]
     public async Task<IActionResult> Create(RecipeInputModel model)
     {
-        if (ModelState.IsValid == false) return View(model);
+        if (ModelState.IsValid == false)
+        {
+            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            return View(model);
+        }
 
         try
         {
-            await recipeService.SaveRecipeAsync(model);
+            await recipeService.CreateRecipeAsync(model);
             return RedirectToAction(nameof(Index));
         }
-        catch(InvalidOperationException ex)
+        catch (InvalidOperationException ex)
         {
             ModelState.AddModelError(string.Empty, ex.Message);
             model.CategoryDropDown = await categoryService.GetDropDownAsync();
