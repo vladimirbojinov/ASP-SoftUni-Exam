@@ -137,11 +137,32 @@ public class RecipeController(
     [HttpPost]
     public async Task<IActionResult> AddRow(int recipeId, IngredientAddRow newIngredient)
     {
-        if (ModelState.IsValid == false) return BadRequest();
+        if (ModelState.IsValid == false)
+        {
+            ModelState.AddModelError(string.Empty, "Invalid ingredient model!");
+            RecipeInputModel? recipeModel = await recipeService.GetRecipeForEditAsync(recipeId);
 
-        await recipeIngredientService.AddRecipeIngredientRowAsync(recipeId, newIngredient);
+            if (recipeModel is null) return NotFound();
+            return View(nameof(Edit), recipeModel);
+        }
 
-        return RedirectToAction(nameof(Edit), new { id = recipeId });
+        try
+        {
+            await recipeIngredientService.AddRecipeIngredientRowAsync(recipeId, newIngredient);
+            return RedirectToAction(nameof(Edit), new { id = recipeId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            RecipeInputModel? recipeModel = await recipeService.GetRecipeForEditAsync(recipeId);
+
+            if (recipeModel is null) return NotFound();
+            return View(nameof(Edit), recipeModel);
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpPost]
