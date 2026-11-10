@@ -32,12 +32,12 @@ public class RecipeService(
 
         Recipe recipe = new()
         {
-            Name = model.Name,
+            Name = model.Name.Trim(),
             Instructions = model.Instructions.Trim(),
             PrepTime = model.PrepTime,
             CookTime = model.CookTime,
             Servings = model.Servings,
-            ImageUrl = model.ImageUrl,
+            ImageUrl = model.ImageUrl?.Trim() ?? DefaultImageUrl,
             CategoryId = model.CategoryId
         };
 
