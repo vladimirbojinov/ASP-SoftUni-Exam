@@ -56,7 +56,7 @@ public class RecipeController(
     {
         RecipeDetailsModel? model = await recipeService.GetRecipeDetailsAsync(id);
 
-        if (model is null) return BadRequest();
+        if (model is null) return NotFound();
 
         return View(model);
     }
