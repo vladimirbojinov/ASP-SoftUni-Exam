@@ -1,5 +1,4 @@
-﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
-using CookBookApp.DTOs.Category;
+﻿using CookBookApp.DTOs.Category;
 using CookBookApp.DTOs.Ingredient;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;

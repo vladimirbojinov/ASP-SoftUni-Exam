@@ -1,10 +1,9 @@
-﻿using CookBookApp.CookBookApp.DTOs.Ingredient;
-using CookBookApp.Core.Contracts;
-using CookBookApp.Data.Models;
+﻿using CookBookApp.Core.Contracts;
 using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Recipe;
 using CookBookApp.GCommon.Enums;
+using CookBookApp.Models;
 using Microsoft.EntityFrameworkCore;
 using static CookBookApp.GCommon.Constants.ApplicationConstants;
 

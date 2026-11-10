@@ -1,5 +1,5 @@
 ﻿using CookBookApp.Data.Configurations;
-using CookBookApp.Data.Models;
+using CookBookApp.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

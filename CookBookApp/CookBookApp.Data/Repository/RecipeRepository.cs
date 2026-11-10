@@ -1,4 +1,4 @@
-﻿using CookBookApp.Data.Models;
+﻿using CookBookApp.Models;
 using CookBookApp.Data.Repository.Common;
 using CookBookApp.Data.Repository.Contracts;
 

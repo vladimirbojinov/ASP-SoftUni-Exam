@@ -1,8 +1,7 @@
 ﻿using CookBookApp.Core.Contracts;
-using CookBookApp.Data;
-using CookBookApp.Data.Models;
 using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.DTOs.Ingredient;
+using CookBookApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookBookApp.Core.Services;

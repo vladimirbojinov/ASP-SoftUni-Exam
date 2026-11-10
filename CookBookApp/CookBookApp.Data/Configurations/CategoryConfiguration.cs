@@ -1,8 +1,8 @@
-﻿namespace CookBookApp.Data.Configurations;
-
-using CookBookApp.Data.Models;
+﻿using CookBookApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CookBookApp.Data.Configurations;
 
 public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {

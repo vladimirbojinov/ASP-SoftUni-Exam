@@ -1,4 +1,4 @@
-namespace CookBookApp;
+namespace CookBookApp.Web;
 
 public class Program
 {

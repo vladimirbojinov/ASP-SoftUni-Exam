@@ -1,5 +1,5 @@
-﻿using CookBookApp.Data.Models;
-using CookBookApp.GCommon.Enums;
+﻿using CookBookApp.GCommon.Enums;
+using CookBookApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
