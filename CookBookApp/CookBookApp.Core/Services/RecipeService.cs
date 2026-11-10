@@ -190,7 +190,7 @@ public class RecipeService(
                 .Select(ri => new IngredientInputViewModel()
                 {
                     Id = ri.IngredientId,
-                    Name = ri.Ingredient.Name.Trim(),
+                    Name = ri.Ingredient.Name,
                     Quantity = ri.Quantity,
                     MeasurementUnit = ri.MeasurementUnit,
                     Note = ri.Note,
