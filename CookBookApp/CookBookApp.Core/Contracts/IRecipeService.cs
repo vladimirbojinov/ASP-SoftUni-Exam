@@ -19,7 +19,7 @@ public interface IRecipeService
 
     Task DeleteRecipe(int id);
 
-    Task<Recipe?> GetRecipeAsync(int id);
+    Task<Recipe?> GetFullRecipeAsync(int id);
 
     Task SaveRecipeAsync(RecipeInputModel model);
 

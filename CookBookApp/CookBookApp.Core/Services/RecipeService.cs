@@ -16,7 +16,7 @@ public class RecipeService(
     IIngredientService ingredientService
 ) : IRecipeService
 {
-    public async Task<Recipe?> GetRecipeAsync(int id)
+    public async Task<Recipe?> GetFullRecipeAsync(int id)
     {
         return await recipeRepository.GetAll()
             .Include(r => r.Category)
