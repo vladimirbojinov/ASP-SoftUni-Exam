@@ -12,6 +12,8 @@ public static class ModelValidationConstants
     {
         public const int NameMinLength = 1;
         public const int NameMaxLength = 150;
+        public const int MinQuantity = 0;
+        public const int MaxQuantity = 100000;
     }
 
     public static class Recipe
