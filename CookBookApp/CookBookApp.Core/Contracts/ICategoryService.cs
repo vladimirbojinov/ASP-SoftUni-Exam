@@ -6,5 +6,5 @@ public interface ICategoryService
 {
     Task<CategoryDropDown[]> GetCategoryDropDownAsync();
 
-    Task<bool> CheckCategoryExistsAsync(int id);
+    Task<bool> ExistsAsync(int id);
 }

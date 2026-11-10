@@ -7,9 +7,9 @@ namespace CookBookApp.Core.Services;
 
 public class CategoryService(ICategoryRepository categoryRepository) : ICategoryService
 {
-    public async Task<bool> CheckCategoryExistsAsync(int id)
+    public Task<bool> ExistsAsync(int id)
     {
-        return await categoryRepository.GetAll().AnyAsync(c => c.Id == id);
+        return categoryRepository.ExistsAsync(id);
     }
 
     public async Task<CategoryDropDown[]> GetCategoryDropDownAsync()
