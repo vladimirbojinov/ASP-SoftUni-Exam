@@ -32,6 +32,23 @@ public class RecipeIngredientService(
         });
 
         await recipeRepository.SaveChangesAsync();
+    public async Task<IngredientInputViewModel[]> GetRecipeIngredientAsync(int recipeId)
+    {
+        IngredientInputViewModel[] recipeIngredients = await recipeIngredientRepository
+            .GetAllAsNoTracking()
+            .Where(ri => ri.RecipeId == recipeId)
+            .OrderBy(ri => ri.Ingredient.Name)
+            .Select(ri => new IngredientInputViewModel
+            {
+                Id = ri.IngredientId,
+                Name = ri.Ingredient.Name,
+                Quantity = ri.Quantity,
+                MeasurementUnit = ri.MeasurementUnit,
+                Note = ri.Note
+            })
+            .ToArrayAsync();
+
+        return recipeIngredients;
     }
 
     public async Task RemoveRecipeIngredientRowAsync(int recipeId, int ingredientId)
