@@ -115,7 +115,7 @@ public class RecipeService(
 
     public async Task<RecipeDetailsModel?> GetRecipeDetailsAsync(int id)
     {
-        Recipe? recipe = await GetRecipeAsync(id);
+        Recipe? recipe = await GetFullRecipeAsync(id);
 
         if (recipe is null) return null;
 
@@ -173,7 +173,7 @@ public class RecipeService(
 
     public async Task<RecipeInputModel?> GetRecipeForEditAsync(int id)
     {
-        Recipe? recipe = await GetRecipeAsync(id);
+        Recipe? recipe = await GetFullRecipeAsync(id);
 
         if (recipe is null) return null;
 
@@ -207,7 +207,7 @@ public class RecipeService(
 
     public async Task<RecipeDeleteModel?> GetRecipeForDeleteAsync(int id)
     {
-        Recipe? recipe = await GetRecipeAsync(id);
+        Recipe? recipe = await recipeRepository.GetByIdAsync(id);
 
         if (recipe is null) return null;
 
