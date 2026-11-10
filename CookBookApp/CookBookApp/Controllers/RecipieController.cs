@@ -77,12 +77,30 @@ public class RecipeController(
         if (ModelState.IsValid == false)
         {
             ModelState.AddModelError(string.Empty, "Invalid recipe model!");
+
+            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            model.IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync();
+            model.Ingredients = await recipeIngredientService.GetRecipeIngredientAsync(model.Id);
+
             return View(model);
         }
 
-        if (await recipeService.EditRecipeAsync(model) == false)
+        try
         {
-            return BadRequest();
+            await recipeService.EditRecipeAsync(model);
+        }
+        catch (InvalidOperationException ex)
+        {
+            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            model.IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync();
+            model.Ingredients = await recipeIngredientService.GetRecipeIngredientAsync(model.Id);
+
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(model);
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
         }
 
         return RedirectToAction(nameof(Index));
