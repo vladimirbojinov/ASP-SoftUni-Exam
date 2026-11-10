@@ -1,12 +1,12 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
-
-using CookBookApp.Core.Contracts;
+﻿using CookBookApp.Core.Contracts;
 using CookBookApp.Core.Services;
 using CookBookApp.Data;
 using CookBookApp.Data.Repository;
 using CookBookApp.Data.Repository.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtension
 {

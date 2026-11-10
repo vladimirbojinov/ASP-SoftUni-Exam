@@ -1,7 +1,7 @@
 ﻿using CookBookApp.GCommon.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace CookBookApp.CookBookApp.DTOs.Ingredient;
+namespace CookBookApp.DTOs.Ingredient;
 
 public class IngredientInputViewModel
 {

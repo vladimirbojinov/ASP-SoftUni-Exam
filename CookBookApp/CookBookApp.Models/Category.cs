@@ -1,7 +1,7 @@
-﻿namespace CookBookApp.Data.Models;
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static CookBookApp.GCommon.Constants.ModelValidationConstants.Category;
+
+namespace CookBookApp.Models;
 
 public class Category
 {

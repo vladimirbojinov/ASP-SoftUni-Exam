@@ -2,7 +2,7 @@ using CookBookApp.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace CookBookApp.Controllers;
+namespace CookBookApp.Web.Controllers;
 
 public class HomeController : Controller
 {
