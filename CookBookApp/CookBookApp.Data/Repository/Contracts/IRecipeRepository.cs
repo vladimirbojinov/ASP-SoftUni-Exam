@@ -4,5 +4,5 @@ namespace CookBookApp.Data.Repository.Contracts;
 
 public interface IRecipeRepository : IRepository<Recipe>
 {
-    Task<Recipe?> FindByIdAsync(int id); 
+    Task<Recipe?> GetByIdAsync(int id); 
 }

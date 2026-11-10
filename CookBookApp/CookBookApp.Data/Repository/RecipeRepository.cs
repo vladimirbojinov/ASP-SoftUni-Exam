@@ -7,7 +7,7 @@ namespace CookBookApp.Data.Repository;
 public class RecipeRepository(CookBookDbContext dbContext)
     : BaseRepository<Recipe>(dbContext), IRecipeRepository
 {
-    public async Task<Recipe?> FindByIdAsync(int id)
+    public async Task<Recipe?> GetByIdAsync(int id)
     {
         return await DbSet.FindAsync(id);
     }
