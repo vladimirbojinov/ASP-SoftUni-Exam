@@ -68,7 +68,7 @@ public class RecipeIngredientService(
         RecipeIngredient? recipeIngredientToRemove = await recipeIngredientRepository
             .GetAllAsNoTracking()
             .Where(ri => ri.Recipe.Id == recipe.Id && ri.Ingredient.Id == ingredient.Id)
-            .FirstOrDefaultAsync() ?? throw new ArgumentException("The recipe didn't contain the specified ingredient!");
+            .FirstOrDefaultAsync() ?? throw new ArgumentException("Ingredient not found in the recipe!");
 
         recipeIngredientRepository.Remove(recipeIngredientToRemove);
         await recipeIngredientRepository.SaveChangesAsync();

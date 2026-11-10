@@ -168,8 +168,15 @@ public class RecipeController(
     [HttpPost]
     public async Task<IActionResult> RemoveRow(int recipeId, int ingredientId)
     {
-        await recipeIngredientService.RemoveRecipeIngredientRowAsync(recipeId, ingredientId);
+        try
+        {
+            await recipeIngredientService.RemoveRecipeIngredientRowAsync(recipeId, ingredientId);
 
-        return RedirectToAction(nameof(Edit), new { id = recipeId });
+            return RedirectToAction(nameof(Edit), new { id = recipeId });
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 }
