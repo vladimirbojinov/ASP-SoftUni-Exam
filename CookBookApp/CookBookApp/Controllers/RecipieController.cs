@@ -16,7 +16,7 @@ public class RecipeController(
     {
         RecipeIndexModel[] recipes = await recipeService.GetRecipeIndexAsync();
 
-        ViewData["CategoriesDropDown"] = await categoryService.GetCategoryDropDownAsync();
+        ViewData["CategoriesDropDown"] = await categoryService.GetDropDownAsync();
 
         return View(recipes);
     }
@@ -42,7 +42,7 @@ public class RecipeController(
         catch(InvalidOperationException ex)
         {
             ModelState.AddModelError(string.Empty, ex.Message);
-            model.CategoryDropDown = await categoryService.GetCategoryDropDownAsync();
+            model.CategoryDropDown = await categoryService.GetDropDownAsync();
             return View(model);
         }
     }
@@ -107,7 +107,7 @@ public class RecipeController(
     {
         RecipeIndexModel[] filteredRecipes = await recipeService.SearchAsync(nameFilter, categoryId);
 
-        ViewData["CategoriesDropDown"] = await categoryService.GetCategoryDropDownAsync();
+        ViewData["CategoriesDropDown"] = await categoryService.GetDropDownAsync();
 
         return View(nameof(Index), filteredRecipes);
     }

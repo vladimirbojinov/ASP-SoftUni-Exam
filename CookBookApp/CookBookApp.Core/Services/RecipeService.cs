@@ -165,7 +165,7 @@ public class RecipeService(
             PrepTime = 1,
             CookTime = 1,
             Servings = 1,
-            CategoryDropDown = await categoryService.GetCategoryDropDownAsync()
+            CategoryDropDown = await categoryService.GetDropDownAsync()
         };
     }
 
@@ -197,7 +197,7 @@ public class RecipeService(
                 .ToArray(),
             IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync(),
             CategoryId = recipe.CategoryId,
-            CategoryDropDown = await categoryService.GetCategoryDropDownAsync()
+            CategoryDropDown = await categoryService.GetDropDownAsync()
         };
 
         return model;

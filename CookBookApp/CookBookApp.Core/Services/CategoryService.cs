@@ -12,7 +12,7 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
         return categoryRepository.ExistsAsync(id);
     }
 
-    public async Task<CategoryDropDown[]> GetCategoryDropDownAsync()
+    public async Task<CategoryDropDown[]> GetDropDownAsync()
     {
         return await categoryRepository
             .GetAllAsNoTracking()
