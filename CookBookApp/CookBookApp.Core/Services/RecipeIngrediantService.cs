@@ -59,15 +59,16 @@ public class RecipeIngredientService(
 
     public async Task RemoveRecipeIngredientRowAsync(int recipeId, int ingredientId)
     {
-        Recipe? recipe = await recipeRepository.FindByIdAsync(recipeId);
-        if (recipe is null) return;
+        Recipe recipe = await recipeRepository.GetByIdAsync(recipeId)
+            ?? throw new ArgumentException("Recipe not found!");
 
-        Ingredient? ingredient = await ingredientRepository.FindByIdAsync(ingredientId);
-        if (ingredient is null) return;
+        Ingredient ingredient = await ingredientRepository.FindByIdAsync(ingredientId)
+            ?? throw new ArgumentException("Ingredient not found!");
 
-        RecipeIngredient recipeIngredientToRemove = await recipeIngredientRepository.GetAllAsNoTracking()
+        RecipeIngredient? recipeIngredientToRemove = await recipeIngredientRepository
+            .GetAllAsNoTracking()
             .Where(ri => ri.Recipe.Id == recipe.Id && ri.Ingredient.Id == ingredient.Id)
-            .FirstAsync();
+            .FirstOrDefaultAsync() ?? throw new ArgumentException("The recipe didn't contain the specified ingredient!");
 
         recipeIngredientRepository.Remove(recipeIngredientToRemove);
         await recipeIngredientRepository.SaveChangesAsync();
