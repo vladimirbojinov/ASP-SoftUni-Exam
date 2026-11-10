@@ -7,7 +7,7 @@ namespace CookBookApp.Data.Configurations;
 
 public class RecipeIngredientConfiguration : IEntityTypeConfiguration<RecipeIngredient>
 {
-    private static List<RecipeIngredient> RecipesIngredients =>
+    private static readonly List<RecipeIngredient> RecipesIngredients =
     [
         // 1 - Classic Pancakes
         new RecipeIngredient { RecipeId = 1, IngredientId = 2,  Quantity = 200m,  MeasurementUnit = MeasurementUnit.Gram,       Note = null,        },

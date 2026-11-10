@@ -6,7 +6,7 @@ namespace CookBookApp.Data.Configurations;
 
 public class IngredientConfiguration : IEntityTypeConfiguration<Ingredient>
 {
-    private static List<Ingredient> Ingredients =>
+    private static readonly List<Ingredient> Ingredients =
     [
         new Ingredient { Id = 1,  Name = "Egg" },
         new Ingredient { Id = 2,  Name = "Flour" },

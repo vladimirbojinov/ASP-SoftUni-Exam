@@ -6,7 +6,7 @@ namespace CookBookApp.Data.Configurations;
 
 public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {
-    private static List<Category> Categories =>
+    private static readonly List<Category> Categories =
     [
         new Category { Id = 1, Name = "Breakfast" },
         new Category { Id = 2, Name = "Main Course" },

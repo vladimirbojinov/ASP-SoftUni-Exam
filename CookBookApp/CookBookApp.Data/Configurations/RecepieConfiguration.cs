@@ -6,7 +6,7 @@ namespace CookBookApp.Data.Configurations;
 
 public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
 {
-    private static List<Recipe> Recipes =
+    private static readonly List<Recipe> Recipes =
     [
         new Recipe
         {
