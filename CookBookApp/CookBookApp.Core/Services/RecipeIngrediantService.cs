@@ -14,13 +14,17 @@ public class RecipeIngredientService(
 {
     public async Task AddRecipeIngredientRowAsync(int recipeId, IngredientAddRow newIngredient)
     {
-        Recipe? recipe = await recipeRepository.FindByIdAsync(recipeId);
-        if (recipe is null) return;
+        Recipe recipe = await recipeRepository.GetByIdAsync(recipeId)
+            ?? throw new ArgumentException("Recipe not found!");
+
+        Ingredient ingredient = await ingredientRepository.FindByIdAsync(newIngredient.Id)
+            ?? throw new ArgumentException("Ingredient not found!");
 
         bool isIngredientDuplicate = await recipeIngredientRepository.GetAll()
             .AnyAsync(ri => ri.RecipeId == recipeId && ri.IngredientId == newIngredient.Id);
 
-        if (isIngredientDuplicate) return;
+        if (isIngredientDuplicate)
+            throw new InvalidOperationException("Ingredient is already added to the recipe!");
 
         await recipeIngredientRepository.AddAsync(new RecipeIngredient
         {
@@ -28,10 +32,12 @@ public class RecipeIngredientService(
             IngredientId = newIngredient.Id,
             Quantity = newIngredient.Quantity,
             MeasurementUnit = newIngredient.MeasurementUnit,
-            Note = null ?? newIngredient.Note?.Trim()
+            Note = newIngredient.Note?.Trim()
         });
 
-        await recipeRepository.SaveChangesAsync();
+        await recipeIngredientRepository.SaveChangesAsync();
+    }
+
     public async Task<IngredientInputViewModel[]> GetRecipeIngredientAsync(int recipeId)
     {
         IngredientInputViewModel[] recipeIngredients = await recipeIngredientRepository
