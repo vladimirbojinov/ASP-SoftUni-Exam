@@ -102,14 +102,15 @@ public class RecipeService(
         return filteredRecipes;
     }
 
-    public async Task DeleteRecipe(int id)
+    public async Task<bool> DeleteRecipe(int id)
     {
-        Recipe? recipeToRemove = await recipeRepository.FindByIdAsync(id);
+        Recipe? recipe = await recipeRepository.GetByIdAsync(id);
 
-        if (recipeToRemove is null) return;
+        if (recipe is null) return false;
 
-        recipeRepository.Remove(recipeToRemove);
+        recipeRepository.Remove(recipe);
         await recipeRepository.SaveChangesAsync();
+        return true;
     }
 
     public async Task<RecipeDetailsModel?> GetRecipeDetailsAsync(int id)

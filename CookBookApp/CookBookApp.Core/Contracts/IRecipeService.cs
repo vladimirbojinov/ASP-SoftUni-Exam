@@ -17,7 +17,7 @@ public interface IRecipeService
 
     Task<RecipeIndexModel[]> SearchAsync(string? nameFilter, int? categoryId);
 
-    Task DeleteRecipe(int id);
+    Task<bool> DeleteRecipe(int id);
 
     Task<Recipe?> GetFullRecipeAsync(int id);
 
