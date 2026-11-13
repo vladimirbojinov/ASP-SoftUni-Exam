@@ -8,7 +8,7 @@ namespace CookBookApp.Data.Repository;
 public class CategoryRepository(CookBookDbContext dbContext)
     : BaseRepository<Category>(dbContext), ICategoryRepository
 {
-    public async Task<bool> ExistsAsync(int id)
+    public async Task<bool> ExistsByIdAsync(int id)
     {
         return await DbSet.AnyAsync(c => c.Id == id);
     }
