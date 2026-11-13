@@ -6,5 +6,7 @@ public interface ICategoryRepository : IRepository<Category>
 {
     Task<bool> ExistsByIdAsync(int id);
 
+    Task<bool> ExistsByNameAsync(string name);
+
     Task<Category?> FindByIdAsync(int id);
 }

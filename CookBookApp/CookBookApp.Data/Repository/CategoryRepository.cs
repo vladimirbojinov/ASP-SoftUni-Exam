@@ -13,6 +13,11 @@ public class CategoryRepository(CookBookDbContext dbContext)
         return await DbSet.AnyAsync(c => c.Id == id);
     }
 
+    public async Task<bool> ExistsByNameAsync(string name)
+    {
+        return await DbSet.AnyAsync(c => c.Name.ToLower() == name.ToLower());
+    }
+
     public async Task<Category?> FindByIdAsync(int id)
     {
         return await DbSet.FindAsync(id);
