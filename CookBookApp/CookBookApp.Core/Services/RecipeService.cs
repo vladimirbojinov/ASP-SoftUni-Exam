@@ -37,7 +37,7 @@ public class RecipeService(
             PrepTime = model.PrepTime,
             CookTime = model.CookTime,
             Servings = model.Servings,
-            ImageUrl = model.ImageUrl?.Trim() ?? DefaultImageUrl,
+            ImageUrl = model.ImageUrl?.Trim(),
             CategoryId = model.CategoryId
         };
 
@@ -53,6 +53,9 @@ public class RecipeService(
         if (await categoryService.ExistsAsync(model.CategoryId) == false)
             throw new InvalidOperationException("Category wasn't selected!");
 
+        if (model.ImageUrl is null) recipe.ImageUrl = null;
+        else recipe.ImageUrl = model.ImageUrl?.Trim();
+
         recipe.Instructions = string.Join('\n',
             model.Instructions.Trim()
             .Split('\n', StringSplitOptions.TrimEntries)
@@ -62,7 +65,6 @@ public class RecipeService(
         recipe.PrepTime = model.PrepTime;
         recipe.CookTime = model.CookTime;
         recipe.Servings = model.Servings;
-        recipe.ImageUrl = model.ImageUrl?.Trim() ?? DefaultImageUrl;
         recipe.CategoryId = model.CategoryId;
 
         await recipeRepository.SaveChangesAsync();
