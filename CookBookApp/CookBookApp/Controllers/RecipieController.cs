@@ -67,7 +67,7 @@ public class RecipeController(
     {
         RecipeInputModel? model = await recipeService.GetRecipeForEditAsync(id);
 
-        if (model is null) return BadRequest();
+        if (model is null) return NotFound();
 
         return View(model);
     }
