@@ -145,8 +145,8 @@ public class RecipeService(
 
     public async Task<RecipeIndexModel[]> GetRecipeIndexAsync()
     {
-        return await recipeRepository.GetAllAsNoTracking()
-            .AsNoTracking()
+        return await recipeRepository
+            .GetAllAsNoTracking()
             .OrderBy(r => r.Name)
             .Select(r => new RecipeIndexModel()
             {
