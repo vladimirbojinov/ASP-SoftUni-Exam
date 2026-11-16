@@ -1,4 +1,5 @@
 ﻿using CookBookApp.Core.Contracts;
+using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Recipe;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace CookBookApp.Web.Controllers;
 public class RecipeController(
     IRecipeService recipeService,
     IRecipeIngredientService recipeIngredientService,
-    ICategoryService categoryService,
+    ICategoryRepository categoryRepository,
     IIngredientService ingredientService
 ) : Controller
 {
@@ -17,7 +18,7 @@ public class RecipeController(
     {
         RecipeIndexModel[] recipes = await recipeService.GetRecipeIndexAsync();
 
-        ViewData["CategoriesDropDown"] = await categoryService.GetDropDownAsync();
+        ViewData["CategoriesDropDown"] = await categoryRepository.GetDropDownAsync();
 
         return View(recipes);
     }
@@ -35,7 +36,7 @@ public class RecipeController(
     {
         if (ModelState.IsValid == false)
         {
-            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            model.CategoryDropDown = await categoryRepository.GetDropDownAsync();
             return View(model);
         }
 
@@ -47,7 +48,7 @@ public class RecipeController(
         catch (InvalidOperationException ex)
         {
             ModelState.AddModelError(string.Empty, ex.Message);
-            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            model.CategoryDropDown = await categoryRepository.GetDropDownAsync();
             return View(model);
         }
     }
@@ -79,7 +80,7 @@ public class RecipeController(
         {
             ModelState.AddModelError(string.Empty, "Invalid recipe model!");
 
-            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            model.CategoryDropDown = await categoryRepository.GetDropDownAsync();
             model.IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync();
             model.Ingredients = await recipeIngredientService.GetRecipeIngredientAsync(model.Id);
 
@@ -92,7 +93,7 @@ public class RecipeController(
         }
         catch (InvalidOperationException ex)
         {
-            model.CategoryDropDown = await categoryService.GetDropDownAsync();
+            model.CategoryDropDown = await categoryRepository.GetDropDownAsync();
             model.IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync();
             model.Ingredients = await recipeIngredientService.GetRecipeIngredientAsync(model.Id);
 
@@ -130,7 +131,7 @@ public class RecipeController(
     {
         RecipeIndexModel[] filteredRecipes = await recipeService.SearchAsync(nameFilter, categoryId);
 
-        ViewData["CategoriesDropDown"] = await categoryService.GetDropDownAsync();
+        ViewData["CategoriesDropDown"] = await categoryRepository.GetDropDownAsync();
 
         return View(nameof(Index), filteredRecipes);
     }
