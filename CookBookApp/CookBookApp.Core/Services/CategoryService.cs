@@ -29,6 +29,19 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
         categoryRepository.Remove(category);
         await categoryRepository.SaveChangesAsync();
     }
+
+    public async Task EditCategoryAsync(CategoryEditModel model)
+    {
+        Category category = await categoryRepository.FindByIdAsync(model.Id)
+            ?? throw new ArgumentException("Category not found!");
+
+        if (await categoryRepository.ExistsByNameAsync(model.Name.Trim()))
+            throw new InvalidOperationException("Category already exists!");
+
+        category.Name = model.Name.Trim();
+        await categoryRepository.SaveChangesAsync();
+    }
+
     public async Task<CategoryCreateModel> GetCategoryForCreateAsync()
     {
         return new CategoryCreateModel();
@@ -46,6 +59,16 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
             RecipesCount = category.Recipes.Count
         };
     }
+
+    public async Task<CategoryEditModel> GetCategoryForEditAsync(int id)
+    {
+        Category category = await categoryRepository.FindByIdAsync(id)
+            ?? throw new ArgumentException("Category not found!");
+
+        return new CategoryEditModel()
+        {
+            Name = category.Name
+        };
     }
 
     public async Task<CategoryIndexModel[]> GetCategoryForIndexAsync()
