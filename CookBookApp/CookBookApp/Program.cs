@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+
 namespace CookBookApp.Web;
 
 public class Program
@@ -41,6 +43,8 @@ public class Program
             .WithStaticAssets();
         app.MapRazorPages()
            .WithStaticAssets();
+
+        StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
         app.Run();
     }
