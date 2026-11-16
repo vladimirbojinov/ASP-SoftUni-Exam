@@ -11,14 +11,16 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
         return categoryRepository.ExistsAsync(id);
     }
 
+    public async Task<CategoryIndexModel[]> GetCategoryForIndexAsync()
     {
         return await categoryRepository
             .GetAllAsNoTracking()
             .OrderBy(c => c.Name)
-            .Select(c => new CategoryDropDown()
+            .Select(c => new CategoryIndexModel()
             {
                 Id = c.Id,
                 Name = c.Name,
+                RecipesCount = c.Recipes.Count
             })
             .ToArrayAsync();
     }
