@@ -20,9 +20,31 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
 
         await categoryRepository.SaveChangesAsync();
     }
+
+    public async Task DeleteCategoryAsync(int id)
+    {
+        Category category = await categoryRepository.FindByIdAsync(id)
+            ?? throw new ArgumentException("Category not found!");
+
+        categoryRepository.Remove(category);
+        await categoryRepository.SaveChangesAsync();
+    }
     public async Task<CategoryCreateModel> GetCategoryForCreateAsync()
     {
         return new CategoryCreateModel();
+    }
+
+    public async Task<CategoryDeleteModel> GetCategoryForDeleteAsync(int id)
+    {
+        Category category = await categoryRepository.GetFullCategory(id)
+            ?? throw new ArgumentException("Category not found!");
+
+        return new CategoryDeleteModel()
+        {
+            Id = category.Id,
+            Name = category.Name,
+            RecipesCount = category.Recipes.Count
+        };
     }
     }
 

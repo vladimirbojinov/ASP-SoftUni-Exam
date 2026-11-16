@@ -35,4 +35,31 @@ public class CategoryController(ICategoryService categoryService) : Controller
             return View(model);
         }
     }
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            CategoryDeleteModel model = await categoryService.GetCategoryForDeleteAsync(id);
+            return View(model);
+        }
+        catch (ArgumentException)
+        {
+            return NotFound();
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirm(int id)
+    {
+        try
+        {
+            await categoryService.DeleteCategoryAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (ArgumentException)
+        {
+            return NotFound();
+        }
+    }
 }
