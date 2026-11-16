@@ -12,7 +12,7 @@ namespace CookBookApp.Core.Services;
 
 public class RecipeService(
     IRecipeRepository recipeRepository,
-    ICategoryService categoryService,
+    ICategoryRepository categoryRepository,
     IIngredientService ingredientService
 ) : IRecipeService
 {
@@ -27,7 +27,7 @@ public class RecipeService(
 
     public async Task CreateRecipeAsync(RecipeInputModel model)
     {
-        if (await categoryService.ExistsAsync(model.CategoryId) == false)
+        if (await categoryRepository.ExistsByIdAsync(model.CategoryId) == false)
             throw new InvalidOperationException("Category wasn't selected!");
 
         Recipe recipe = new()
@@ -50,7 +50,7 @@ public class RecipeService(
         Recipe recipe = await recipeRepository.GetByIdAsync(model.Id)
             ?? throw new ArgumentException("Recipe not found!");
 
-        if (await categoryService.ExistsAsync(model.CategoryId) == false)
+        if (await categoryRepository.ExistsByIdAsync(model.CategoryId) == false)
             throw new InvalidOperationException("Category wasn't selected!");
 
         if (model.ImageUrl is null) recipe.ImageUrl = null;
@@ -169,7 +169,7 @@ public class RecipeService(
             PrepTime = 1,
             CookTime = 1,
             Servings = 1,
-            CategoryDropDown = await categoryService.GetDropDownAsync()
+            CategoryDropDown = await categoryRepository.GetDropDownAsync()
         };
     }
 
@@ -201,7 +201,7 @@ public class RecipeService(
                 .ToArray(),
             IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync(),
             CategoryId = recipe.CategoryId,
-            CategoryDropDown = await categoryService.GetDropDownAsync()
+            CategoryDropDown = await categoryRepository.GetDropDownAsync()
         };
 
         return model;

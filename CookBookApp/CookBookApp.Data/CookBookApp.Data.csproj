@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CookBookApp.DTOs\CookBookApp.DTOs.csproj" />
     <ProjectReference Include="..\CookBookApp.Models\CookBookApp.Models.csproj" />
   </ItemGroup>
 
