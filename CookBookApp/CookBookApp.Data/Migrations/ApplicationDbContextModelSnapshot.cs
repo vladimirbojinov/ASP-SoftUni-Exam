@@ -17,12 +17,77 @@ namespace CookBookApp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.12")
+                .HasAnnotation("ProductVersion", "10.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Category", b =>
+            modelBuilder.Entity("CookBookApp.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("CookBookApp.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +127,7 @@ namespace CookBookApp.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Ingredient", b =>
+            modelBuilder.Entity("CookBookApp.Models.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,7 +225,7 @@ namespace CookBookApp.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Recipe", b =>
+            modelBuilder.Entity("CookBookApp.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,6 +238,9 @@ namespace CookBookApp.Data.Migrations
 
                     b.Property<int>("CookTime")
                         .HasColumnType("int");
+
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(2048)
@@ -198,52 +266,12 @@ namespace CookBookApp.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Recipes");
+                    b.HasIndex("CreatedByUserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            CookTime = 15,
-                            Instructions = "Whisk flour, milk, eggs, sugar and salt into a smooth batter. Fry ladlefuls in melted butter until golden on both sides.",
-                            Name = "Classic Pancakes",
-                            PrepTime = 10,
-                            Servings = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 2,
-                            CookTime = 60,
-                            Instructions = "Fry the onion in olive oil, brown the beef, add the canned tomatoes and simmer for 45 minutes. Boil the spaghetti and serve with the sauce.",
-                            Name = "Spaghetti Bolognese",
-                            PrepTime = 15,
-                            Servings = 4
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 4,
-                            CookTime = 1,
-                            Instructions = "Dice the tomatoes and cucumbers, dress with olive oil and salt, then top with grated feta cheese.",
-                            Name = "Shopska Salad",
-                            PrepTime = 10,
-                            Servings = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 3,
-                            CookTime = 25,
-                            Instructions = "Melt the chocolate with the butter, stir in sugar and eggs, fold in the flour. Bake at 180°C for about 25 minutes.",
-                            Name = "Chocolate Brownies",
-                            PrepTime = 15,
-                            Servings = 12
-                        });
+                    b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("CookBookApp.Models.RecipeIngredient", b =>
                 {
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
@@ -483,71 +511,6 @@ namespace CookBookApp.Data.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -576,12 +539,10 @@ namespace CookBookApp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -618,12 +579,10 @@ namespace CookBookApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -633,26 +592,32 @@ namespace CookBookApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Recipe", b =>
+            modelBuilder.Entity("CookBookApp.Models.Recipe", b =>
                 {
-                    b.HasOne("CookBookApp.Data.Data.Models.Category", "Category")
+                    b.HasOne("CookBookApp.Models.Category", "Category")
                         .WithMany("Recipes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("CookBookApp.Models.ApplicationUser", "CreatedByUser")
+                        .WithMany("Recipes")
+                        .HasForeignKey("CreatedByUserId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("CreatedByUser");
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("CookBookApp.Models.RecipeIngredient", b =>
                 {
-                    b.HasOne("CookBookApp.Data.Data.Models.Ingredient", "Ingredient")
+                    b.HasOne("CookBookApp.Models.Ingredient", "Ingredient")
                         .WithMany("RecipesIngredients")
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CookBookApp.Data.Data.Models.Recipe", "Recipe")
+                    b.HasOne("CookBookApp.Models.Recipe", "Recipe")
                         .WithMany("RecipesIngredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -674,7 +639,7 @@ namespace CookBookApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CookBookApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -683,7 +648,7 @@ namespace CookBookApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CookBookApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -698,7 +663,7 @@ namespace CookBookApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CookBookApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -707,24 +672,29 @@ namespace CookBookApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CookBookApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Category", b =>
+            modelBuilder.Entity("CookBookApp.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Recipes");
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Ingredient", b =>
+            modelBuilder.Entity("CookBookApp.Models.Category", b =>
+                {
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("CookBookApp.Models.Ingredient", b =>
                 {
                     b.Navigation("RecipesIngredients");
                 });
 
-            modelBuilder.Entity("CookBookApp.Data.Data.Models.Recipe", b =>
+            modelBuilder.Entity("CookBookApp.Models.Recipe", b =>
                 {
                     b.Navigation("RecipesIngredients");
                 });

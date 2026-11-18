@@ -1,10 +1,11 @@
+using CookBookApp.Web.Extensions;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
 namespace CookBookApp.Web;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ public class Program
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
         builder.Services.AddControllersWithViews();
+        builder.Services.AddRazorPages();
 
         WebApplication app = builder.Build();
 
@@ -33,8 +35,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-        app.UseRouting();        
+        app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapStaticAssets();
@@ -46,6 +49,7 @@ public class Program
            .WithStaticAssets();
 
         StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
+        await app.SeedIdentityAsync();
 
         app.Run();
     }

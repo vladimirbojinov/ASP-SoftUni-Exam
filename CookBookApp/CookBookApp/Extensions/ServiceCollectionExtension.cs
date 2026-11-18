@@ -3,6 +3,7 @@ using CookBookApp.Core.Services;
 using CookBookApp.Data;
 using CookBookApp.Data.Repository;
 using CookBookApp.Data.Repository.Contracts;
+using CookBookApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,9 +46,17 @@ public static class ServiceCollectionExtension
 
     public static IServiceCollection AddApplicationIdentity(this IServiceCollection services)
     {
-        services
-            .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<CookBookDbContext>();
+        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        {
+            options.Password.RequiredLength = 6;
+            options.Password.RequireDigit = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.User.RequireUniqueEmail = true;
+            options.SignIn.RequireConfirmedAccount = false;
+        })
+        .AddEntityFrameworkStores<CookBookDbContext>()
+        .AddDefaultTokenProviders();
 
         return services;
     }
