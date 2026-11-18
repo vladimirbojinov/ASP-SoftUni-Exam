@@ -44,7 +44,7 @@ public class IdentitySeeder
                 throw new InvalidOperationException("Failed to create admin user.");
         }
 
-        if (adminUser.Recipes.Count != 0 == false)
+        if (await context.Recipes.AnyAsync(r => r.CreatedByUserId == adminUser.Id) == false)
         {
             AddRecipesToAdmin(context, adminUser);
             await context.SaveChangesAsync();
