@@ -2,7 +2,6 @@
 using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace CookBookApp.Core.Services;
 
@@ -13,16 +12,8 @@ public class IngredientService(IIngredientRepository ingredientRepository) : IIn
         return await ingredientRepository.FindByIdAsync(id);
     }
 
-    public async Task<IngredientDropDown[]> GetIngredientDropDownAsync()
+    public async Task<IngredientDropDown[]> GetDropDownAsync()
     {
-        return await ingredientRepository
-            .GetAllAsNoTracking()
-            .OrderBy(i => i.Name)
-            .Select(i => new IngredientDropDown()
-            {
-                Id = i.Id,
-                Name = i.Name
-            })
-            .ToArrayAsync();
+        return await ingredientRepository.GetDropDownAsync();
     }
 }

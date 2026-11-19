@@ -5,7 +5,7 @@ namespace CookBookApp.Core.Contracts;
 
 public interface IIngredientService
 {
-    Task<IngredientDropDown[]> GetIngredientDropDownAsync();
+    Task<IngredientDropDown[]> GetDropDownAsync();
 
     Task<Ingredient?> GetIngredientAsync(int id);
 }

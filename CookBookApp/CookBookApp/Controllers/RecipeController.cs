@@ -1,5 +1,4 @@
 ﻿using CookBookApp.Core.Contracts;
-using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.DTOs.Ingredient;
 using CookBookApp.DTOs.Recipe;
 using Microsoft.AspNetCore.Mvc;
@@ -81,7 +80,7 @@ public class RecipeController(
             ModelState.AddModelError(string.Empty, "Invalid recipe model!");
 
             model.CategoryDropDown = await categoryService.GetDropDownAsync();
-            model.IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync();
+            model.IngredientDropDowns = await ingredientService.GetDropDownAsync();
             model.Ingredients = await recipeIngredientService.GetRecipeIngredientAsync(model.Id);
 
             return View(model);
@@ -94,7 +93,7 @@ public class RecipeController(
         catch (InvalidOperationException ex)
         {
             model.CategoryDropDown = await categoryService.GetDropDownAsync();
-            model.IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync();
+            model.IngredientDropDowns = await ingredientService.GetDropDownAsync();
             model.Ingredients = await recipeIngredientService.GetRecipeIngredientAsync(model.Id);
 
             ModelState.AddModelError(string.Empty, ex.Message);

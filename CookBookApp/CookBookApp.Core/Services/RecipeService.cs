@@ -13,7 +13,7 @@ namespace CookBookApp.Core.Services;
 public class RecipeService(
     IRecipeRepository recipeRepository,
     ICategoryRepository categoryRepository,
-    IIngredientService ingredientService
+    IIngredientRepository ingredientRepository
 ) : IRecipeService
 {
     public async Task<Recipe?> GetFullRecipeAsync(int id)
@@ -199,7 +199,7 @@ public class RecipeService(
                 })
                 .OrderBy(vm => vm.Name)
                 .ToArray(),
-            IngredientDropDowns = await ingredientService.GetIngredientDropDownAsync(),
+            IngredientDropDowns = await ingredientRepository.GetDropDownAsync(),
             CategoryId = recipe.CategoryId,
             CategoryDropDown = await categoryRepository.GetDropDownAsync()
         };
