@@ -9,9 +9,9 @@ public class CategoryController(ICategoryService categoryService) : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        CategoryIndexModel[] recipes = await categoryService.GetCategoryForIndexAsync();
+        CategoryIndexModel[] model = await categoryService.GetCategoryForIndexAsync();
 
-        return View(recipes);
+        return View(model);
     }
 
     [HttpGet]
