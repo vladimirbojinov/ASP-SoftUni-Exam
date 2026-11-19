@@ -84,4 +84,9 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
             })
             .ToArrayAsync();
     }
+
+    public async Task<CategoryDropDown[]> GetDropDownAsync()
+    {
+        return await categoryRepository.GetDropDownAsync();
+    }
 }

@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CookBookApp.Core\CookBookApp.Core.csproj" />
-    <ProjectReference Include="..\CookBookApp.Data\CookBookApp.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,4 +18,6 @@ public interface ICategoryService
     Task EditCategoryAsync(CategoryEditModel model);
 
     Task DeleteCategoryAsync(int id);
+
+    Task<CategoryDropDown[]> GetDropDownAsync();
 }
