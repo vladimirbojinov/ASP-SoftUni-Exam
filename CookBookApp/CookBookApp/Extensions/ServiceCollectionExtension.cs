@@ -4,6 +4,7 @@ using CookBookApp.Data;
 using CookBookApp.Data.Repository;
 using CookBookApp.Data.Repository.Contracts;
 using CookBookApp.Models;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,6 +61,19 @@ public static class ServiceCollectionExtension
         })
         .AddEntityFrameworkStores<CookBookDbContext>()
         .AddDefaultTokenProviders();
+
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.LoginPath = "/Identity/Account/Login";
+            options.LogoutPath = "/Identity/Account/Logout";
+            options.AccessDeniedPath = "/Home/Error";
+            options.Events.OnRedirectToAccessDenied = context =>
+            {
+                context.RedirectUri = QueryHelpers.AddQueryString(context.RedirectUri, "statusCode", "403");
+                context.Response.Redirect(context.RedirectUri);
+                return Task.CompletedTask;
+            };
+        });
 
         return services;
     }
