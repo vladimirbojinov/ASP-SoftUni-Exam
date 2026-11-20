@@ -48,12 +48,15 @@ public static class ServiceCollectionExtension
     {
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
-            options.Password.RequiredLength = 6;
+            options.Password.RequiredLength = 4;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireLowercase = false;
             options.Password.RequireDigit = false;
             options.Password.RequireUppercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.User.RequireUniqueEmail = true;
             options.SignIn.RequireConfirmedAccount = false;
+            options.SignIn.RequireConfirmedEmail = false;
         })
         .AddEntityFrameworkStores<CookBookDbContext>()
         .AddDefaultTokenProviders();
