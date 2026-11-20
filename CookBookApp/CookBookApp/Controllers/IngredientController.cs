@@ -1,10 +1,13 @@
 ﻿using CookBookApp.Core.Contracts;
 using CookBookApp.DTOs.Ingredient;
+using CookBookApp.GCommon.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CookBookApp.Web.Controllers;
 
-public class IngredientController(IIngredientService ingredientService) : Controller
+[Authorize(Roles = Roles.Administrator)]
+public class IngredientController(IIngredientService ingredientService) : ApplicationController
 {
     [HttpGet]
     public async Task<IActionResult> Index()

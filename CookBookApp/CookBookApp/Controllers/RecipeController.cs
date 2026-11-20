@@ -10,7 +10,7 @@ public class RecipeController(
     IRecipeIngredientService recipeIngredientService,
     ICategoryService categoryService,
     IIngredientService ingredientService
-) : Controller
+) : ApplicationController
 {
     [HttpGet]
     public async Task<IActionResult> Index()

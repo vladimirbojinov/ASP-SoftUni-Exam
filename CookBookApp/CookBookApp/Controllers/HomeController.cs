@@ -1,23 +1,27 @@
 using CookBookApp.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace CookBookApp.Web.Controllers;
 
-public class HomeController : Controller
+public class HomeController : ApplicationController
 {
+    [AllowAnonymous]
     public IActionResult Index()
     {
         return View();
     }
 
+    [AllowAnonymous]
     public IActionResult Privacy()
     {
         return View();
     }
 
+    [AllowAnonymous]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error(int statusCode)
+    public IActionResult Error(int statusCode = 500)
     {
         int code = statusCode;
         Response.StatusCode = code;
