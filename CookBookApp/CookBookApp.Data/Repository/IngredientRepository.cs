@@ -9,6 +9,11 @@ namespace CookBookApp.Data.Repository;
 public class IngredientRepository(CookBookDbContext dbContext)
     : BaseRepository<Ingredient>(dbContext), IIngredientRepository
 {
+    public async Task<bool> ExistsByNameAsync(string name)
+    {
+        return await DbSet.AnyAsync(i => i.Name.ToLower() == name.ToLower());
+    }
+
     public async Task<Ingredient?> FindByIdAsync(int id)
     {
         return await DbSet.FindAsync(id);
@@ -25,5 +30,12 @@ public class IngredientRepository(CookBookDbContext dbContext)
                 Name = i.Name
             })
             .ToArrayAsync();
+    }
+
+    public async Task<Ingredient?> GetFullIngredientAsync(int id)
+    {
+        return await DbSet
+            .Include(i => i.RecipesIngredients)
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 }
