@@ -49,7 +49,7 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
 
     public async Task<CategoryDeleteModel> GetCategoryForDeleteAsync(int id)
     {
-        Category category = await categoryRepository.GetFullCategory(id)
+        Category category = await categoryRepository.GetFullCategoryAsync(id)
             ?? throw new ArgumentException("Category not found!");
 
         return new CategoryDeleteModel()

@@ -36,9 +36,9 @@ public class CategoryRepository(CookBookDbContext dbContext)
         return await DbSet.FindAsync(id);
     }
 
-    public Task<Category?> GetFullCategory(int id)
+    public async Task<Category?> GetFullCategoryAsync(int id)
     {
-        return DbSet
+        return await DbSet
             .Include(c => c.Recipes)
             .FirstOrDefaultAsync(c => c.Id == id);
     }

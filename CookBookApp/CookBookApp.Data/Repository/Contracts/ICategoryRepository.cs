@@ -13,5 +13,5 @@ public interface ICategoryRepository : IRepository<Category>
 
     Task<CategoryDropDown[]> GetDropDownAsync();
 
-    Task<Category?> GetFullCategory(int id);
+    Task<Category?> GetFullCategoryAsync(int id);
 }
