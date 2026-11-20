@@ -9,8 +9,14 @@ public interface IIngredientService
     Task<IngredientCreateModel> GetIngredientForCreateAsync();
 
     Task<IngredientEditModel> GetIngredientForEditAsync(int id);
+
+    Task<IngredientDeleteModel> GetIngredientForDeleteAsync(int id);
+
     Task CreateIngredientAsync(IngredientCreateModel model);
 
     Task EditIngredientAsync(IngredientEditModel model);
+
+    Task DeleteIngredientAsync(int id);
+
     Task<IngredientDropDown[]> GetDropDownAsync();
 }

@@ -21,6 +21,14 @@ public class IngredientService(IIngredientRepository ingredientRepository) : IIn
         await ingredientRepository.SaveChangesAsync();
     }
 
+    public async Task DeleteIngredientAsync(int id)
+    {
+        Ingredient ingredient = await ingredientRepository.FindByIdAsync(id)
+            ?? throw new ArgumentException("Ingredient not found!");
+
+        ingredientRepository.Remove(ingredient);
+        await ingredientRepository.SaveChangesAsync();
+    }
 
     public async Task EditIngredientAsync(IngredientEditModel model)
     {
@@ -37,6 +45,19 @@ public class IngredientService(IIngredientRepository ingredientRepository) : IIn
     public async Task<IngredientCreateModel> GetIngredientForCreateAsync()
     {
         return new IngredientCreateModel();
+    }
+
+    public async Task<IngredientDeleteModel> GetIngredientForDeleteAsync(int id)
+    {
+        Ingredient ingredient = await ingredientRepository.GetFullIngredientAsync(id)
+            ?? throw new ArgumentException("Ingredient not found!");
+
+        return new IngredientDeleteModel()
+        {
+            Id = ingredient.Id,
+            Name = ingredient.Name,
+            RecipesCount = ingredient.RecipesIngredients.Count
+        };
     }
 
     public async Task<IngredientEditModel> GetIngredientForEditAsync(int id)

@@ -76,4 +76,32 @@ public class IngredientController(IIngredientService ingredientService) : Contro
 
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            IngredientDeleteModel model = await ingredientService.GetIngredientForDeleteAsync(id);
+            return View(model);
+        }
+        catch (ArgumentException)
+        {
+            return NotFound();
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirm(int id)
+    {
+        try
+        {
+            await ingredientService.DeleteIngredientAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (ArgumentException)
+        {
+            return NotFound();
+        }
+    }
 }
