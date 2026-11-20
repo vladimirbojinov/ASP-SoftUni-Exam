@@ -36,4 +36,44 @@ public class IngredientController(IIngredientService ingredientService) : Contro
             return View(model);
         }
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        try
+        {
+            IngredientEditModel model = await ingredientService.GetIngredientForEditAsync(id);
+            return View(model);
+        }
+        catch (ArgumentException)
+        {
+            return NotFound();
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(IngredientEditModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            ModelState.AddModelError(string.Empty, "Invalid ingredient data!");
+            return View(model);
+        }
+
+        try
+        {
+            await ingredientService.EditIngredientAsync(model);
+        }
+        catch (ArgumentException)
+        {
+            return NotFound();
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(model);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 }
