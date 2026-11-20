@@ -8,8 +8,23 @@ namespace CookBookApp.Core.Services;
 
 public class IngredientService(IIngredientRepository ingredientRepository) : IIngredientService
 {
+    public async Task CreateIngredientAsync(IngredientCreateModel model)
     {
-        return await ingredientRepository.FindByIdAsync(id);
+        if (await ingredientRepository.ExistsByNameAsync(model.Name.Trim()))
+            throw new InvalidOperationException("Ingredient already exists!");
+
+        await ingredientRepository.AddAsync(new Ingredient()
+        {
+            Name = model.Name.Trim()
+        });
+
+        await ingredientRepository.SaveChangesAsync();
+    }
+
+    public async Task<IngredientCreateModel> GetIngredientForCreateAsync()
+    {
+        return new IngredientCreateModel();
+    }
     public async Task<IngredientIndexModel[]> GetIngredientForIndexAsync()
     {
         return await ingredientRepository

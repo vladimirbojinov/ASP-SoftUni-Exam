@@ -13,4 +13,27 @@ public class IngredientController(IIngredientService ingredientService) : Contro
 
         return View(ingredients);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+        IngredientCreateModel model = await ingredientService.GetIngredientForCreateAsync();
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(IngredientCreateModel model)
+    {
+        try
+        {
+            await ingredientService.CreateIngredientAsync(model);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(model);
+        }
+    }
 }
