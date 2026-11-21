@@ -315,6 +315,7 @@ namespace CookBookApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedByUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImageUrl")
@@ -514,7 +515,9 @@ namespace CookBookApp.Data.Migrations
 
                     b.HasOne("CookBookApp.Models.ApplicationUser", "CreatedByUser")
                         .WithMany("Recipes")
-                        .HasForeignKey("CreatedByUserId");
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

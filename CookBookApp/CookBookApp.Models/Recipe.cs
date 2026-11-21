@@ -36,8 +36,9 @@ public class Recipe
     [DeleteBehavior(DeleteBehavior.Restrict)]
     public Category Category { get; set; } = null!;
 
+    [Required]
     [ForeignKey(nameof(CreatedByUser))]
-    public string? CreatedByUserId { get; set; }
+    public string CreatedByUserId { get; set; } = null!;
 
     public ICollection<RecipeIngredient> RecipesIngredients { get; set; } 
         = new HashSet<RecipeIngredient>();
